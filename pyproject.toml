@@ -1,0 +1,20 @@
+[project]
+name = "ecomguard-backend"
+version = "0.1.0"
+description = "EcomGuard - Autonomous Product Crisis Intelligence Agent"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi[standard]>=0.115.0",
+    "sse-starlette>=2.0.0",
+    "openai-agents>=0.0.7",
+    "openai>=1.60.0",
+    "python-dotenv>=1.0.0",
+    "pydantic>=2.0.0",
+    "pydantic-settings>=2.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+    "httpx>=0.27.0",
+]
