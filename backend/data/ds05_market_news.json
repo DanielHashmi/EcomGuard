@@ -1,0 +1,18 @@
+{
+  "source_id": "DS-05",
+  "source_type": "market_intelligence",
+  "last_updated": "2024-11-26T10:00:00Z",
+  "credibility": "industry_blog_medium_reliability",
+  "articles": [
+    {
+      "id": "NEWS-001",
+      "headline": "ShenZhen CableWorks Under Investigation for USB-C Cable Defects in Southeast Asian Markets",
+      "source": "TechSupplyChain Asia (industry blog)",
+      "published_date": "2024-11-26T10:00:00Z",
+      "author": "Lin Wei, Supply Chain Correspondent",
+      "reliability_score": "medium",
+      "body": "ShenZhen CableWorks Ltd, a major USB-C cable manufacturer based in Guangdong Province, China, is facing scrutiny from regulators in multiple Southeast Asian markets following reports of overheating and connector failure in their USB-C fast charging cables.\n\nThe Consumer Protection Board of Malaysia issued a preliminary warning on November 20 after receiving 47 complaints about USB-C cables traced back to ShenZhen CableWorks. The complaints describe connectors reaching temperatures exceeding 60 degrees Celsius during normal charging operations, with at least 8 reports of partial melting at the connector housing.\n\nIndonesian authorities have also opened an investigation after similar reports surfaced in Jakarta and Surabaya. Sources within the Indonesian National Standards Body (BSN) indicate that cables from ShenZhen CableWorks batches manufactured between September and November 2024 may have a connector soldering defect that increases electrical resistance under high-wattage charging loads (45W and above).\n\nShenZhen CableWorks has not issued a public statement but is reportedly cooperating with the Guangdong Province Consumer Safety Board, which opened its own review on November 10. Industry analysts note that the company supplies USB-C cables to over 200 retailers across Asia, including several major e-commerce platforms in Pakistan, India, and Bangladesh.\n\nThe affected batches are believed to use a revised connector design that was introduced in September 2024 to reduce manufacturing costs. Sources familiar with the matter suggest the design change reduced the contact surface area in the USB-C connector, leading to higher resistance and heat generation during fast charging.\n\nRetailers sourcing from ShenZhen CableWorks are advised to review their current inventory and monitor customer feedback for signs of overheating. No formal recall has been issued at this time.\n\nThis is a developing story. TechSupplyChain Asia will provide updates as more information becomes available.",
+      "tags": ["ShenZhen CableWorks", "USB-C", "product safety", "recall risk", "Southeast Asia", "connector defect", "overheating"]
+    }
+  ]
+}
