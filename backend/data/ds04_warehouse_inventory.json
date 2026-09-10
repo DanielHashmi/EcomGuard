@@ -1,0 +1,76 @@
+{
+  "source_id": "DS-04",
+  "source_type": "warehouse_inventory",
+  "last_updated": "2024-11-23T08:00:00Z",
+  "credibility": "internal_manual_entry",
+  "warehouse_location": "TechMart PK - Karachi Distribution Center",
+  "note": "Inventory counts updated manually by warehouse staff. Last physical count conducted on date shown in last_updated field per SKU.",
+  "inventory": [
+    {
+      "sku": "CBL-047",
+      "product_name": "USB-C Fast Charging Cable (1.5m, Braided)",
+      "quantity_in_stock": 412,
+      "batch": "B2024-11",
+      "last_updated": "2024-11-23T08:00:00Z",
+      "location": "Rack B, Shelf 3",
+      "reorder_point": 100,
+      "reorder_quantity": 500,
+      "status": "in_stock"
+    },
+    {
+      "sku": "PHC-012",
+      "product_name": "Phone Case Premium (Universal)",
+      "quantity_in_stock": 234,
+      "batch": "B2024-10",
+      "last_updated": "2024-11-25T10:00:00Z",
+      "location": "Rack A, Shelf 1",
+      "reorder_point": 50,
+      "reorder_quantity": 300,
+      "status": "in_stock"
+    },
+    {
+      "sku": "TWS-089",
+      "product_name": "Wireless Earbuds Pro",
+      "quantity_in_stock": 87,
+      "batch": "B2024-10",
+      "last_updated": "2024-11-26T14:00:00Z",
+      "location": "Rack C, Shelf 2",
+      "reorder_point": 30,
+      "reorder_quantity": 150,
+      "status": "in_stock"
+    },
+    {
+      "sku": "SPK-034",
+      "product_name": "Bluetooth Speaker Mini",
+      "quantity_in_stock": 156,
+      "batch": "B2024-09",
+      "last_updated": "2024-11-24T09:00:00Z",
+      "location": "Rack D, Shelf 1",
+      "reorder_point": 40,
+      "reorder_quantity": 200,
+      "status": "in_stock"
+    },
+    {
+      "sku": "CHG-056",
+      "product_name": "Wall Charger 65W",
+      "quantity_in_stock": 198,
+      "batch": "B2024-10",
+      "last_updated": "2024-11-26T11:00:00Z",
+      "location": "Rack B, Shelf 5",
+      "reorder_point": 50,
+      "reorder_quantity": 250,
+      "status": "in_stock"
+    },
+    {
+      "sku": "SCR-078",
+      "product_name": "Screen Protector Tempered Glass",
+      "quantity_in_stock": 310,
+      "batch": "B2024-10",
+      "last_updated": "2024-11-27T08:00:00Z",
+      "location": "Rack A, Shelf 4",
+      "reorder_point": 75,
+      "reorder_quantity": 400,
+      "status": "in_stock"
+    }
+  ]
+}
