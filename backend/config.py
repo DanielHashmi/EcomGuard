@@ -1,14 +1,15 @@
 """EcomGuard Backend Configuration."""
 
-import os
-from pydantic_settings import BaseSettings
 from dotenv import load_dotenv
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 load_dotenv()
 
 
 class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
+
+    model_config = SettingsConfigDict(env_file=".env")
 
     # LLM Provider — switch with LLM_PROVIDER=groq|gemini in .env.
     # Groq + GPT-OSS-120B is the spec default; Gemini is a drop-in fallback.
@@ -48,9 +49,5 @@ class Settings(BaseSettings):
     max_refund_per_unit_pkr: int = 1499
     batch_under_investigation: str = "B2024-11"
     product_sku: str = "CBL-047"
-
-    class Config:
-        env_file = ".env"
-
 
 settings = Settings()
