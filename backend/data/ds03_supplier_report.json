@@ -1,0 +1,46 @@
+{
+  "source_id": "DS-03",
+  "source_type": "supplier_quality_report",
+  "last_updated": "2024-11-15T00:00:00Z",
+  "credibility": "supplier_self_reported",
+  "document_title": "Quality Assurance Report - Batch B2024-11",
+  "supplier": {
+    "name": "ShenZhen CableWorks Ltd",
+    "location": "Shenzhen, Guangdong Province, China",
+    "relationship_since": "2023-03",
+    "total_batches_supplied": 14,
+    "previous_incident_count": 1,
+    "previous_incident_detail": "Batch B2024-03 had 2.1% failure rate due to connector housing defect. Issue resolved with revised mold."
+  },
+  "batch": {
+    "batch_id": "B2024-11",
+    "product_sku": "CBL-047",
+    "product_name": "USB-C Fast Charging Cable (1.5m, Braided)",
+    "manufacture_date": "2024-10-28",
+    "ship_date": "2024-11-05",
+    "arrival_date": "2024-11-18",
+    "units_in_batch": 500,
+    "units_shipped": 480,
+    "units_held_for_qa": 20,
+    "qa_sample_size": 20,
+    "qa_failures": 2,
+    "qa_failure_rate_percent": 0.4,
+    "qa_failure_detail": "2 units showed slightly elevated resistance at connector junction. Within acceptable tolerance per IEC 62680-1-2."
+  },
+  "certifications": {
+    "CE": {"status": "valid", "expiry": "2025-06-30"},
+    "FCC": {"status": "valid", "expiry": "2025-09-15"},
+    "UL": {"status": "expired", "expiry": "2024-08-31", "note": "Renewal application submitted 2024-09-15, pending review"},
+    "RoHS": {"status": "valid", "expiry": "2025-12-31"}
+  },
+  "external_flags": [
+    {
+      "flag_type": "regulatory_review",
+      "description": "ShenZhen CableWorks Ltd is currently under review by the Consumer Safety Board of Guangdong Province regarding USB-C cable quality standards compliance across multiple product lines.",
+      "date_flagged": "2024-11-10",
+      "severity": "medium",
+      "source": "Guangdong Province Consumer Safety Board public registry"
+    }
+  ],
+  "notes": "Supplier reports all units passed visual inspection. Elevated resistance in 2 QA samples attributed to connector soldering variance within tolerance. Supplier recommends no action required."
+}
