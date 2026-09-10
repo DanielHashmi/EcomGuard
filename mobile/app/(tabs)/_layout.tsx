@@ -1,10 +1,10 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
-import { Platform, Text, View, StyleSheet } from 'react-native';
+import { Platform, Text, View, StyleSheet, type ColorValue } from 'react-native';
 import { theme } from '../../constants/theme';
 import StateSync from '../../components/StateSync';
 
-function TabIcon({ icon, color }: { icon: string; color: string }) {
+function TabIcon({ icon, color }: { icon: string; color: ColorValue }) {
   return (
     <View style={s.iconWrap}>
       <Text style={[s.icon, { color }]}>{icon}</Text>
