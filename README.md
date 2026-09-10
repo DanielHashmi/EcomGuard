@@ -1,454 +1,183 @@
-# EcomGuard — Autonomous Product Crisis Intelligence Agent
+# EcomGuard
 
-<div align="center">
+<p align="center">
+  <img src="public/thumbnail.png" alt="EcomGuard manager dashboard" width="900" />
+</p>
 
-![EcomGuard](https://img.shields.io/badge/EcomGuard-Crisis%20Intelligence-5B4FE8?style=for-the-badge)
-![Python](https://img.shields.io/badge/Python-3.11+-blue?style=for-the-badge&logo=python)
-![React Native](https://img.shields.io/badge/React%20Native-0.81-61DAFB?style=for-the-badge&logo=react)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?style=for-the-badge&logo=fastapi)
+<p align="center">
+  Autonomous product-crisis intelligence for e-commerce operations.
+</p>
 
-**An autonomous AI agent that monitors 5 operational data sources, detects product crises, surfaces contradictions, and proposes actions — all in real-time.**
+<p align="center">
+  <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white" alt="Python 3.11+"></a>
+  <a href="https://fastapi.tiangolo.com/"><img src="https://img.shields.io/badge/FastAPI-0.115%2B-009688?logo=fastapi&logoColor=white" alt="FastAPI 0.115+"></a>
+  <a href="https://expo.dev/"><img src="https://img.shields.io/badge/Expo-57-000020?logo=expo&logoColor=white" alt="Expo 57"></a>
+  <a href="https://reactnative.dev/"><img src="https://img.shields.io/badge/React%20Native-0.86.3-61DAFB?logo=react&logoColor=20232A" alt="React Native 0.86.3"></a>
+</p>
 
-[Features](#features) • [Architecture](#architecture) • [Quick Start](#quick-start) • [Demo Scenario](#demo-scenario) • [API Docs](#api-documentation)
+EcomGuard is a full-stack demonstration of an autonomous AI agent that monitors operational signals, investigates emerging product issues, explains conflicting evidence, and proposes controlled response actions through a real-time manager dashboard.
 
-</div>
+The included scenario follows TechMart PK and a USB-C cable product (`CBL-047`, batch `B2024-11`) with a simulated overheating defect.
 
----
+## Capabilities
 
-## 🎯 What is EcomGuard?
+- Monitors five local operational sources: customer reviews, sales and returns, supplier quality, warehouse inventory, and market news.
+- Classifies reviews as genuine, spam, duplicate, or wrong-batch before using them as evidence.
+- Detects time-based complaint patterns and contradictions between sources.
+- Streams agent reasoning, action state, and outcome updates over Server-Sent Events (SSE).
+- Proposes actions with rationale, risk, estimated cost, approval requirements, retries, and escalation handling.
+- Provides a cross-platform Expo dashboard for web, Android, and iOS.
 
-EcomGuard is a **spec-driven development showcase** demonstrating how an autonomous AI agent can:
+## Architecture
 
-- ✅ **Monitor** 5 heterogeneous data sources (reviews, sales, supplier reports, inventory, news)
-- ✅ **Classify** customer reviews as genuine signals vs. noise (spam, duplicates, wrong batch)
-- ✅ **Detect** temporal patterns and escalating complaint frequencies
-- ✅ **Cross-reference** data sources to build a complete crisis picture
-- ✅ **Surface contradictions** when the same metric is reported differently across sources
-- ✅ **Propose actions** with cost estimates, risk levels, and business constraint awareness
-- ✅ **Execute actions** with retry logic, failure handling, and escalation
-- ✅ **Generate outcome reports** with before/after metrics and baseline comparisons
-
-**The Scenario:** A Pakistani e-commerce business (TechMart PK) sells a USB-C cable (SKU CBL-047, Batch B2024-11) with a connector overheating defect. The agent autonomously discovers this crisis from customer reviews, investigates, and proposes a response plan.
-
----
-
-## ✨ Features
-
-### 🤖 Autonomous Agent
-- **Groq-powered LLM** (GPT-OSS-120B) via the OpenAI Agents SDK — one-line switch to Gemini via `LLM_PROVIDER`
-- **9 function tools** for data reading, classification, reasoning, and action proposal
-- **Real-time reasoning log** streamed to the dashboard via SSE
-- **Contradiction detection** with source credibility assessment
-- **Business constraint awareness** (budget, notification limits, supplier cooldown)
-
-### 📱 Mobile Dashboard (React Native + Expo)
-- **5 screens:** Dashboard, Live Feed, Agent Reasoning, Actions, Outcome Report
-- **Real-time updates** via Server-Sent Events (SSE)
-- **Cross-platform:** iOS, Android, Web
-- **Modern design** inspired by premium mobile apps (warm neutrals, clean cards, smooth animations)
-
-### 🔄 Action Execution Engine
-- **Sequential execution** with state transitions
-- **Retry logic** (1 retry per action)
-- **Deliberate failure** (supplier contact fails first attempt, succeeds on retry)
-- **Escalation** with manual fallback drafts
-- **Outcome report** auto-generated after execution
-
-### 📊 Data Sources
-1. **DS-01:** Customer Reviews (real-time feed)
-2. **DS-02:** Sales & Returns (30-day CSV)
-3. **DS-03:** Supplier Quality Report (PDF-parsed JSON)
-4. **DS-04:** Warehouse Inventory (manual table)
-5. **DS-05:** Market News (industry articles)
-
----
-
-## 🏗️ Architecture
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    Mobile Dashboard                          │
-│  (React Native + Expo + Zustand + SSE)                      │
-│  ┌──────┬──────┬──────────┬─────────┬────────┐             │
-│  │ Dash │ Feed │ Reasoning│ Actions │ Report │             │
-│  └──────┴──────┴──────────┴─────────┴────────┘             │
-└────────────────────┬────────────────────────────────────────┘
-                     │ REST + SSE
-┌────────────────────▼────────────────────────────────────────┐
-│                  FastAPI Backend                             │
-│  ┌──────────────────────────────────────────────────────┐   │
-│  │  Routes: /api/reviews, /api/agent, /api/actions,    │   │
-│  │          /api/state, /events (SSE)                   │   │
-│  └──────────────────────────────────────────────────────┘   │
-│  ┌──────────────────────────────────────────────────────┐   │
-│  │  EcomGuard Agent (openai-agents SDK + Groq)         │   │
-│  │  • 9 function tools                                  │   │
-│  │  • Autonomous investigation                          │   │
-│  │  • Action proposal + execution                       │   │
-│  └──────────────────────────────────────────────────────┘   │
-│  ┌──────────────────────────────────────────────────────┐   │
-│  │  In-Memory State (AppState singleton)               │   │
-│  │  • 5 data sources (JSON/CSV)                         │   │
-│  │  • Reviews, reasoning log, contradictions, actions  │   │
-│  └──────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────┘
+```text
+Expo / React Native dashboard
+        │ REST + SSE
+        ▼
+FastAPI backend
+  ├─ REST route modules
+  ├─ EcomGuard agent and function tools
+  ├─ action execution and outcome reporting
+  └─ in-memory application state
+        │
+        ▼
+Local JSON and CSV scenario data
 ```
 
----
+The backend is intentionally stateless between process restarts: dashboard state is held in memory and can be restored to the initial scenario with `POST /api/reset`.
 
-## 🚀 Quick Start
+## Quick start
 
-### Prerequisites
-- **Python 3.11+** (with `uv` or `pip`)
-- **Node.js 18+** (with `pnpm`, `npm`, or `yarn`)
-- **Groq API Key** ([Get one free](https://console.groq.com/keys))
+### Requirements
 
-### 1. Clone & Setup Backend
+- Python 3.11 or newer
+- Node.js 18 or newer
+- `uv` for the Python environment
+- `pnpm` for the mobile workspace
+- An API key for the selected model provider: Groq by default, or Gemini
+
+### 1. Configure and install the backend
+
+From the repository root:
 
 ```bash
-# Clone the repo
-git clone <your-repo-url>
-cd EcomGuard
-
-# Install Python dependencies (using uv)
-uv pip install -e .
-
-# Or using pip
-pip install -e .
-
-# Configure environment
+uv sync
 cp .env.example .env
-# Edit .env and add your GROQ_API_KEY
 ```
 
-### 2. Start Backend
+On Windows PowerShell, use `Copy-Item .env.example .env` instead of `cp`. Add a `GROQ_API_KEY` to `.env`, or set `LLM_PROVIDER=gemini` and provide `GEMINI_API_KEY`.
+
+### 2. Start the backend
 
 ```bash
-# From project root — the app module is backend.main:app
 uv run uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
-
-# Backend runs on http://localhost:8000
-# API docs: http://localhost:8000/docs
 ```
 
-> On WSL/Linux, if a stale Windows `.venv` exists, create a fresh one:
-> `uv venv .venv && source .venv/bin/activate && uv pip install -e .`
+The API is available at `http://localhost:8000`. Interactive OpenAPI documentation is available at `http://localhost:8000/docs`.
 
-### 3. Setup Mobile App
+### 3. Install and start the dashboard
+
+In a second terminal:
 
 ```bash
-# From project root
 cd mobile
-
-# Install dependencies
-npm install
-# or: pnpm install
-
-# API URL is auto-detected from Expo for physical devices.
-# Only set mobile/.env EXPO_PUBLIC_API_URL if auto-detection can't reach
-# your backend (see mobile/.env for the template).
-```
-
-### 4. Start Mobile App
-
-```bash
-# From mobile/ directory
-
-# For web
-pnpm start --web
-
-# For iOS (requires Mac + Xcode)
-pnpm start --ios
-
-# For Android (requires Android Studio)
-pnpm start --android
-
-# Or scan QR code with Expo Go app
+pnpm install
 pnpm start
 ```
 
----
+Use the Expo CLI to open a platform, or use the package scripts directly:
 
-## 🎬 Demo Scenario
-
-### Step 1: Auto-Stream Reviews
-1. Open the **Feed** tab
-2. Tap **▶ Auto-Stream** (or type reviews in manually, one at a time)
-3. Watch 24 pre-built customer reviews stream in at 2-second intervals — including 3 planted noise reviews (spam, duplicate, wrong-batch)
-
-### Step 2: Agent Investigation
-- After 5+ reviews are ingested, the agent **automatically triggers** an investigation (no prompt needed)
-- Switch to the **Reasoning** tab to watch the agent's thought process in real-time:
-  - Classifies each review (genuine vs. spam/duplicate/wrong-batch) and excludes the noise
-  - Chooses which sources to consult and reads them (you see each "Consulting …" step)
-  - Detects the escalating complaint/return pattern over time
-  - Surfaces the three-source stock contradiction and explains which source it trusts
-  - Discounts the still-positive revenue signal as a lagging indicator
-  - Proposes ~5 actions with rationale, tradeoffs, cost estimates, and risk levels
-
-### Step 3: Approve & Execute Actions
-1. Switch to the **Actions** tab
-2. Review proposed actions. Internal low-risk ones (inventory flag, monitoring) are **auto-approved**; external ones need your sign-off:
-   - Pause product listing (needs approval)
-   - Flag inventory for quarantine (auto-approved)
-   - Notify affected customers (needs approval)
-   - Contact supplier (needs approval — **fails, retries, then escalates to a manual draft**)
-   - Enable enhanced monitoring (auto-approved)
-3. Tap **✓ Approve All**
-4. Tap **▶ Execute**
-5. Watch actions execute sequentially with real-time status transitions (pending → executing → complete/escalated)
-
-### Step 4: View Outcome Report
-- Switch to the **Report** tab
-- See before/after metrics, execution summary, baseline comparison, rollback conditions, and outstanding items
-
-### Step 5: Reset & Repeat
-- Tap the **↺** button on the Dashboard to reset the entire system
-- All data returns to pristine initial state in <3 seconds
-
----
-
-## 📡 API Documentation
-
-### REST Endpoints
-
-| Method | Path | Description |
-|--------|------|-------------|
-| `GET` | `/` | Health check |
-| `GET` | `/health` | Detailed health |
-| `GET` | `/api/state` | Full state snapshot |
-| `POST` | `/api/reset` | Reset system |
-| `GET` | `/api/reviews` | List ingested reviews |
-| `POST` | `/api/reviews` | Add single review |
-| `POST` | `/api/reviews/auto-stream` | Start auto-streaming |
-| `POST` | `/api/reviews/stop-stream` | Stop auto-streaming |
-| `GET` | `/api/agent/status` | Agent status |
-| `POST` | `/api/agent/investigate` | Trigger investigation |
-| `GET` | `/api/agent/reasoning` | Reasoning log |
-| `GET` | `/api/agent/contradictions` | Contradictions |
-| `GET` | `/api/actions/proposed` | Proposed actions |
-| `POST` | `/api/actions/{id}/approve` | Approve action |
-| `POST` | `/api/actions/{id}/reject` | Reject action |
-| `POST` | `/api/actions/approve-all` | Approve all |
-| `POST` | `/api/actions/execute` | Execute approved |
-| `GET` | `/api/actions/results` | Execution results |
-| `GET` | `/api/outcome` | Outcome report |
-
-### SSE Stream
-
-**Endpoint:** `GET /events`
-
-**Event Types:**
-- `connected` — Initial connection
-- `agent_status` — Agent state change
-- `review_added` — New review ingested
-- `review_classified` — Review classification
-- `reasoning` — Agent reasoning entry
-- `contradiction_found` — Data contradiction
-- `actions_proposed` — Actions proposed
-- `action_executing` — Action started
-- `action_complete` — Action succeeded
-- `action_failed` — Action failed
-- `action_escalated` — Action escalated
-- `outcome_report` — Report generated
-- `reset` — System reset
-
----
-
-## 🛠️ Tech Stack
-
-### Backend
-- **FastAPI** 0.115+ (async Python web framework)
-- **openai-agents** SDK (single autonomous agent, function tools, streaming)
-- **Groq** GPT-OSS-120B via the OpenAI-compatible API (Gemini switchable via `LLM_PROVIDER`)
-- **sse-starlette** (Server-Sent Events streaming)
-- **Pydantic** 2.0+ (data validation)
-- **python-dotenv** (environment variables)
-
-### Frontend
-- **Expo** 54 (React Native framework)
-- **React Native** 0.81.5
-- **React** 19.1
-- **Zustand** 4.5 (state management)
-- **react-native-sse** 1.2 (SSE client for native)
-- **react-native-svg** 15 (the live complaint-velocity chart)
-- **expo-router** 6 (file-based navigation)
-
----
-
-## 📂 Project Structure
-
+```bash
+pnpm run web
+pnpm run android
+pnpm run ios
 ```
+
+The web client defaults to `http://localhost:8000`. Native clients derive the host from Expo. If a physical device cannot reach the backend, copy `mobile/.env.example` to `mobile/.env` and set `EXPO_PUBLIC_API_URL` to the computer's LAN address.
+
+Windows users can also use `setup-env.bat`, `start-backend.bat`, and `start-mobile.bat` from the repository root.
+
+## Demo flow
+
+1. Open the Feed tab and start Auto-Stream, or add reviews manually.
+2. After five reviews, the backend automatically begins an investigation.
+3. Review classifications, evidence, contradictions, and reasoning in the dashboard.
+4. Review proposed actions, approve the required actions, and execute them.
+5. Inspect the outcome report, then reset the scenario from the Dashboard tab.
+
+The scenario contains 24 seeded reviews and a deliberate supplier-contact retry/escalation path for demonstrating failure handling.
+
+## API surface
+
+| Area | Endpoints |
+| --- | --- |
+| Health | `GET /`, `GET /health` |
+| State | `GET /api/state`, `POST /api/reset`, `GET /api/outcome` |
+| Reviews | `GET /api/reviews`, `POST /api/reviews`, `POST /api/reviews/auto-stream`, `POST /api/reviews/stop-stream` |
+| Agent | `GET /api/agent/status`, `POST /api/agent/investigate`, `GET /api/agent/reasoning`, `GET /api/agent/contradictions` |
+| Actions | `GET /api/actions/proposed`, `POST /api/actions/{id}/approve`, `POST /api/actions/{id}/reject`, `POST /api/actions/approve-all`, `POST /api/actions/execute`, `GET /api/actions/results` |
+| Events | `GET /events` — SSE stream for dashboard updates |
+
+The SSE stream publishes connection, review, reasoning, contradiction, agent-status, action, outcome, reset, and error events.
+
+## Configuration
+
+Backend settings are read from the root `.env` file:
+
+| Variable | Purpose | Default |
+| --- | --- | --- |
+| `LLM_PROVIDER` | `groq` or `gemini` | `groq` |
+| `MODEL_NAME` | Optional explicit model override | Provider default |
+| `GROQ_API_KEY` | Groq credential | — |
+| `GEMINI_API_KEY` | Gemini credential when selected | — |
+| `PORT` | Backend port | `8000` |
+
+Additional business constraints and provider defaults are defined in `backend/config.py`. Never commit `.env` or API keys.
+
+## Repository layout
+
+```text
 EcomGuard/
 ├── backend/
-│   ├── main.py                 # FastAPI app entry
-│   ├── config.py               # Settings
-│   ├── state.py                # In-memory state
-│   ├── event_bus.py            # SSE pub/sub
-│   ├── agent/
-│   │   ├── ecomguard_agent.py  # Autonomous agent + investigation runner
-│   │   ├── model_provider.py   # Groq / Gemini provider switch
-│   │   ├── prompts.py          # System prompt
-│   │   ├── tools.py            # 10 function tools
-│   │   └── actions.py          # Execution engine
-│   ├── routes/
-│   │   ├── events.py           # SSE endpoint
-│   │   ├── reviews.py          # Review routes
-│   │   ├── agent.py            # Agent routes
-│   │   ├── actions.py          # Action routes
-│   │   └── state.py            # State routes
-│   └── data/
-│       ├── ds01_reviews.json
-│       ├── ds02_sales_returns.csv
-│       ├── ds03_supplier_report.json
-│       ├── ds04_warehouse_inventory.json
-│       └── ds05_market_news.json
+│   ├── agent/                 Agent, provider adapter, tools, and action engine
+│   ├── data/                  Seed JSON and CSV scenario sources
+│   ├── routes/                FastAPI route modules and SSE endpoint
+│   ├── config.py              Environment-backed settings
+│   ├── event_bus.py           In-process event pub/sub
+│   ├── main.py                FastAPI application entrypoint
+│   └── state.py               In-memory state and reset behavior
 ├── mobile/
-│   ├── app/
-│   │   ├── _layout.tsx         # Root layout
-│   │   └── (tabs)/
-│   │       ├── _layout.tsx     # Tab layout
-│   │       ├── index.tsx       # Dashboard
-│   │       ├── feed.tsx        # Live Feed
-│   │       ├── reasoning.tsx   # Agent Reasoning
-│   │       ├── actions.tsx     # Actions
-│   │       └── report.tsx      # Outcome Report
-│   ├── components/             # 8 custom components
-│   ├── store/                  # Zustand store
-│   ├── hooks/                  # useSSE, useApi
-│   ├── types/                  # TypeScript types
-│   ├── constants/              # Theme, data sources
-│   └── config/                 # API URL
-├── .env                        # Backend environment
-├── .env.example                # Template
-├── pyproject.toml              # Python deps
-└── README.md                   # This file
+│   ├── app/                   Expo Router screens and tab navigation
+│   ├── components/            Dashboard UI components
+│   ├── config/, hooks/        API and SSE integration
+│   ├── constants/, store/     Theme, source metadata, and Zustand state
+│   └── types/                 Shared TypeScript interfaces
+├── tests/                     Backend smoke tests
+├── .env.example               Backend configuration template
+├── mobile/.env.example        Optional native dashboard configuration
+├── pyproject.toml             Python package and dependency metadata
+├── uv.lock                    Locked Python dependency resolution
+├── thumbnail.png              README project preview
+└── README.md                  Project documentation
 ```
 
----
+Supporting specifications and planning material remain in the repository root: `spec.md`, `feature-dependency.md`, `implementation_plan.md`, and `submission-requirements.md`.
 
-## 🎨 Design System
+## Validation
 
-The mobile app uses a **warm, modern design system** inspired by premium mobile apps:
+Run the backend smoke tests and compile check from the repository root:
 
-- **Colors:** Warm cream background (#F5F0EB), white cards, deep indigo accent (#5B4FE8)
-- **Typography:** System fonts with 8 size scales (xs to hero)
-- **Spacing:** 4px base unit (xs to xxl)
-- **Border Radius:** 6px to 28px (xs to xl)
-- **Shadows:** 3 elevation levels (sm, md, lg)
-- **Animations:** Reanimated 4 for smooth, native-feeling interactions
-
----
-
-## 🧪 Testing the Agent
-
-### Manual Review Input
 ```bash
-curl -X POST http://localhost:8000/api/reviews \
-  -H "Content-Type: application/json" \
-  -d '{
-    "text": "The USB-C connector gets extremely hot during charging!",
-    "rating": 1,
-    "reviewer": "TestUser"
-  }'
+uv run pytest
+uv run python -m compileall -q backend
 ```
 
-### Force Investigation
+Validate the mobile TypeScript project from `mobile/`:
+
 ```bash
-curl -X POST http://localhost:8000/api/agent/investigate
+pnpm exec tsc --noEmit
 ```
 
-### Reset System
-```bash
-curl -X POST http://localhost:8000/api/reset
-```
+## License
 
----
-
-## 🔧 Configuration
-
-### Backend (.env)
-```bash
-# Provider switch: groq (spec default, GPT-OSS-120B) or gemini
-LLM_PROVIDER=groq
-# Leave MODEL_NAME blank to use the provider default
-# (groq -> openai/gpt-oss-120b, gemini -> gemini-2.0-flash)
-MODEL_NAME=
-GROQ_API_KEY=gsk_your_key_here
-GEMINI_API_KEY=          # optional; must start with AIza (Google AI Studio)
-PORT=8000
-```
-
-> **Groq free-tier note:** the free tier caps at 8,000 tokens/min and
-> 200,000 tokens/day. A full investigation uses ~30k tokens and streams over
-> ~2–4 min while throttled. For snappier demos or many repeats, upgrade the
-> Groq key to a paid tier, or flip `LLM_PROVIDER=gemini` with a valid AI
-> Studio key.
-
-### Mobile (mobile/.env)
-```bash
-EXPO_PUBLIC_API_URL=http://192.168.1.100:8000
-```
-
-**Note:** Replace `192.168.1.100` with your machine's local IP address. Find it with:
-- **Windows:** `ipconfig` (look for IPv4 Address)
-- **Mac/Linux:** `ifconfig` or `ip addr` (look for inet)
-
----
-
-## 🐛 Troubleshooting
-
-### Backend won't start
-- ✅ Check Python version: `python --version` (must be 3.11+)
-- ✅ Verify GROQ_API_KEY in `.env`
-- ✅ Install dependencies: `uv pip install -e .`
-
-### Mobile app can't connect to backend
-- ✅ Check backend is running: `curl http://localhost:8000/health`
-- ✅ Verify `EXPO_PUBLIC_API_URL` in `mobile/.env` uses your local IP (not `localhost`)
-- ✅ Ensure phone/emulator is on the same network as your computer
-- ✅ Check firewall isn't blocking port 8000
-
-### SSE not working
-- ✅ Check browser console for SSE connection errors
-- ✅ Verify `/events` endpoint is accessible: `curl http://localhost:8000/events`
-- ✅ On native, ensure `react-native-sse` is installed
-
-### Agent not investigating
-- ✅ Ensure 5+ reviews are ingested (auto-trigger threshold)
-- ✅ Check agent status: `curl http://localhost:8000/api/agent/status`
-- ✅ Manually trigger: `curl -X POST http://localhost:8000/api/agent/investigate`
-
-### Investigation is slow or errors with "rate limit" / 429
-- The Groq free tier caps at 8,000 tokens/min and 200,000 tokens/day. Under the
-  minute cap a full investigation streams over ~2–4 min (this is expected and is
-  shown live on the dashboard). A 429 means the daily cap is spent — wait for the
-  reset, use a second key, upgrade to a paid Groq tier, or set `LLM_PROVIDER=gemini`
-  with a valid Google AI Studio key (must start with `AIza`).
-- Any provider error is surfaced on the dashboard in plain language and never
-  crashes the app (NFR-004).
-
----
-
-## 📝 License
-
-MIT License — see LICENSE file for details.
-
----
-
-## 🙏 Acknowledgments
-
-- **OpenAI Agents SDK** for the agent framework
-- **Groq** for fast LLM inference
-- **Expo** for the amazing React Native developer experience
-- **FastAPI** for the elegant Python web framework
-
----
-
-<div align="center">
-
-**Built with ❤️ as a spec-driven development showcase**
-
-[Report Bug](https://github.com/yourusername/ecomguard/issues) • [Request Feature](https://github.com/yourusername/ecomguard/issues)
-
-</div>
+This repository does not currently include a license.
