@@ -1,0 +1,46 @@
+date,sku,product_name,units_sold,units_returned,return_reason,revenue_pkr
+2024-10-30,CBL-047,USB-C Fast Charging Cable,12,0,,17988
+2024-10-30,PHC-012,Phone Case Premium,8,0,,15992
+2024-10-30,TWS-089,Wireless Earbuds Pro,5,0,,24995
+2024-10-30,SPK-034,Bluetooth Speaker Mini,3,0,,11997
+2024-10-30,CHG-056,Wall Charger 65W,7,0,,20993
+2024-10-30,SCR-078,Screen Protector Glass,15,1,wrong_size,10485
+2024-10-31,CBL-047,USB-C Fast Charging Cable,14,0,,20986
+2024-10-31,PHC-012,Phone Case Premium,6,1,color_mismatch,9994
+2024-10-31,TWS-089,Wireless Earbuds Pro,4,0,,19996
+2024-10-31,SPK-034,Bluetooth Speaker Mini,5,0,,19995
+2024-10-31,CHG-056,Wall Charger 65W,6,0,,17994
+2024-10-31,SCR-078,Screen Protector Glass,18,0,,12582
+2024-11-01,CBL-047,USB-C Fast Charging Cable,10,0,,14990
+2024-11-01,PHC-012,Phone Case Premium,9,0,,17991
+2024-11-01,TWS-089,Wireless Earbuds Pro,3,0,,14997
+2024-11-01,SPK-034,Bluetooth Speaker Mini,4,0,,15996
+2024-11-01,CHG-056,Wall Charger 65W,5,0,,14995
+2024-11-01,SCR-078,Screen Protector Glass,12,0,,8388
+2024-11-02,CBL-047,USB-C Fast Charging Cable,11,0,,16489
+2024-11-03,CBL-047,USB-C Fast Charging Cable,13,0,,19487
+2024-11-04,CBL-047,USB-C Fast Charging Cable,9,0,,13491
+2024-11-05,CBL-047,USB-C Fast Charging Cable,15,0,,22485
+2024-11-06,CBL-047,USB-C Fast Charging Cable,10,0,,14990
+2024-11-07,CBL-047,USB-C Fast Charging Cable,12,0,,17988
+2024-11-08,CBL-047,USB-C Fast Charging Cable,14,0,,20986
+2024-11-09,CBL-047,USB-C Fast Charging Cable,8,0,,11992
+2024-11-10,CBL-047,USB-C Fast Charging Cable,11,0,,16489
+2024-11-11,CBL-047,USB-C Fast Charging Cable,16,0,,23984
+2024-11-12,CBL-047,USB-C Fast Charging Cable,10,0,,14990
+2024-11-13,CBL-047,USB-C Fast Charging Cable,13,0,,19487
+2024-11-14,CBL-047,USB-C Fast Charging Cable,9,0,,13491
+2024-11-15,CBL-047,USB-C Fast Charging Cable,12,0,,17988
+2024-11-16,CBL-047,USB-C Fast Charging Cable,14,0,,20986
+2024-11-17,CBL-047,USB-C Fast Charging Cable,11,0,,16489
+2024-11-18,CBL-047,USB-C Fast Charging Cable,10,0,,14990
+2024-11-19,CBL-047,USB-C Fast Charging Cable,13,1,changed_mind,17988
+2024-11-20,CBL-047,USB-C Fast Charging Cable,18,0,,26982
+2024-11-21,CBL-047,USB-C Fast Charging Cable,22,1,changed_mind,31479
+2024-11-22,CBL-047,USB-C Fast Charging Cable,25,1,defective_overheating,35975
+2024-11-23,CBL-047,USB-C Fast Charging Cable,20,3,defective_overheating,25474
+2024-11-24,CBL-047,USB-C Fast Charging Cable,16,5,defective_overheating,16489
+2024-11-25,CBL-047,USB-C Fast Charging Cable,14,7,defective_overheating,10493
+2024-11-26,CBL-047,USB-C Fast Charging Cable,10,9,defective_overheating,1499
+2024-11-27,CBL-047,USB-C Fast Charging Cable,8,11,defective_overheating,-4497
+2024-11-28,CBL-047,USB-C Fast Charging Cable,6,12,defective_overheating,-8994
